@@ -1,7 +1,6 @@
 from Book import Book
-
 class ElectronicBook(Book):
-    def __init__(self, title="", author="", publisher="", year=0, genre="", count_in_warehouse=0, format="", file_size_in_bytes=0):
+    def __init__(self, title="", author="", publisher="", year=0, genre="", count_in_warehouse=0, format="", file_size_in_bytes=0, ):
         super().__init__(title, author, publisher, year, genre)
         self.count_in_warehouse = count_in_warehouse
         self.format = format
@@ -24,3 +23,4 @@ class ElectronicBook(Book):
 
     def __str__(self):
         return f"{super().__str__()}, Format: {self.format}, File Size: {self.file_size_in_bytes} bytes"
+

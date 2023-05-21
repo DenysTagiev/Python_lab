@@ -1,5 +1,4 @@
 from Book import Book 
-
 class PaperBook(Book):
     def __init__(self, title="", author="", publisher="", year=0, genre="", count_in_warehouse=0, pages=0, size_width=0, size_height=0):
         super().__init__(title, author, publisher, year, genre)

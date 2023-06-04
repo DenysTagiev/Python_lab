@@ -8,6 +8,7 @@ class ElectronicBook(Book):
         self.format = format
         self.file_size_in_bytes = file_size_in_bytes
 
+
     def book(self, quantity):
         if self.count_in_warehouse >= quantity:
             self.count_in_warehouse -= quantity

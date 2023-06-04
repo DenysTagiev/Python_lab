@@ -2,12 +2,14 @@ from Models.Book import Book
 
 
 class PaperBook(Book):
-    def __init__(self, title="", author="", publisher="", year=0, genre="", count_in_warehouse=0, pages=0, size_width=0, size_height=0):
+    def __init__(self, title="", author="", publisher="", year=0, genre="", count_in_warehouse=0, pages=0, size_width=0, size_height=0, book_id=""):
         super().__init__(title, author, publisher, year, genre)
         self.count_in_warehouse = count_in_warehouse
         self.pages = pages
         self.size_width = size_width
         self.size_height = size_height
+        self.book_id = book_id
+
 
     def book(self, quantity):
         if self.count_in_warehouse >= quantity:

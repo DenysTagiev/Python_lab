@@ -5,11 +5,14 @@ from Models.electronic_book import ElectronicBook
 from Models.paper_book import PaperBook
 from Models.electronic_book import ElectronicBook
 from Managers.book_manager import BookManager
+from Exception.BookNotFoundException import BookNotFoundException
+from Exception.InsufficientBooksException import InsufficientBooksException
 
 
 def main():
     paper_book = PaperBook("Father", "Maks", "Ivan", 2005, "Novel", 130, 300, 150)
     electronic_book = ElectronicBook("Sample", "John", "ABC", 2022, "Fiction", 100, 200, "PDF", 1920)
+
 
     book_manager = BookManager()
     book_manager.add_book(paper_book)
@@ -32,6 +35,16 @@ def main():
 
     book_manager.display_books()
 
+    print("\nBorrowing books...")
+    try:
+        borrowed_quantity = book_manager.book(1, 10)
+        print(f"Borrowed {borrowed_quantity} books.")
+    except Exception as e:
+        print("Exception occurred:", str(e))
+
+    print("\nPrinting book list...")
+    for book in book_manager.books:
+        print(book)
 
 if __name__ == "__main__":
     main()

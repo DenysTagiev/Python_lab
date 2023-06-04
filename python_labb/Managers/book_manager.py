@@ -1,3 +1,9 @@
+from Exception.BookNotFoundException import BookNotFoundException
+from Exception.InsufficientBooksException import InsufficientBooksException
+from Exception.LoggedDecorator import LoggedDecorator
+from Models.paper_book import PaperBook
+
+
 class BookManager:
     def __init__(self):
         self.books = []
@@ -33,3 +39,22 @@ class BookManager:
     def check_conditions(self, condition):
         return {"all": all(condition(book) for book in self.books),
                 "any": any(condition(book) for book in self.books)}
+
+    def get_book_by_id(self, book_id):
+        for book in self.books:
+            if isinstance(book, PaperBook) and book.book_id == book_id:
+                return book
+        return None
+
+    @LoggedDecorator(InsufficientBooksException, "console")
+    def book(self, book_id, quantity):
+        book = self.get_book_by_id(book_id)
+        if book is None:
+            raise BookNotFoundException("Book not found")
+
+        if book.count_in_warehouse >= quantity:
+            book.count_in_warehouse -= quantity
+            return quantity
+        else:
+            raise InsufficientBooksException("Insufficient books available")
+
